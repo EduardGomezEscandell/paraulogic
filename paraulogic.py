@@ -1,18 +1,26 @@
 import re
 import unidecode
+import sys
 
+# Valors per defecte
 lletra_central = "u"
 altres_lletres = "aelmnt"
 
+# Valors d'entrada
+if len(sys.argv) == 3:
+    lletra_central = sys.argv[1]
+    altres_lletres = sys.argv[2]
 
+print("Lletra central:", lletra_central)
+print("Lletres extra: ", altres_lletres)
+
+# Cerca
 regex = f"^[{altres_lletres}{lletra_central}]*{lletra_central}[{altres_lletres}{lletra_central}]*$"
 pattern = re.compile(regex)
 
-print("Patró de cerca:", regex)
-
 found_words = []
 
-with open("valid_words.txt", "r") as wordbank:
+with open("diec.txt", "r") as wordbank:
     for word in wordbank:
 
         if len(word.strip()) < 3:
@@ -30,6 +38,7 @@ with open("valid_words.txt", "r") as wordbank:
         if pattern.match(clean_word):
             found_words.append(word)
 
+# Resultats
 nwords = len(found_words)
 print(f"S'ha trobat {nwords} paraul{'a' if nwords==1 else 'es'}:")
 i = 1
