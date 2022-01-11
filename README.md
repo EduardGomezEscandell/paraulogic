@@ -26,9 +26,9 @@ S'ha trobat 84 paraules:
       ...
 ```
 
-Per fer un test respecte una llista de paraules coneguda, pots fer servir `test.py`:
+Per fer un test respecte una llista de paraules coneguda, pots fer servir `test.py [any mes dia]`:
 ```
-$ python /home/eduard/Code/paraulogic/test.py
+$ python /home/eduard/Code/paraulogic/test.py 2021 01 09
 Lletra central: u
 Lletres extra:  aelmnt
 
