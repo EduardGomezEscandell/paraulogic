@@ -1,6 +1,6 @@
 # Solucionari del paraulògic
 
-Aquest codi permet trobar la majoria de solucions del Paraulògic. Hi ha algunes paraules que de moment no troba, com els femenins dels adjectius.
+Aquest codi permet trobar la majoria de solucions del Paraulògic. Hi ha algunes paraules que de moment no troba, com els femenins dels adjectius. Això es deu a que encara no he implementat una forma de generar-los a partir de les entrades del DIEC.
 
 
 ### Llistat de mots
@@ -13,17 +13,29 @@ Utilitza el programa així:
 $ python3 paraulogic.py [lletra central] [lletres extra]
 ```
 
-Per exemple, per al 9 de gener de 2022:
+Per exemple, per al 10 de gener de 2022:
 ```
 $ python paraulogic.py u aelmnt
+Lletra central: e
+Lletres extra:  urflps
+S'ha trobat 84 paraules:
+  1. elf
+  2. ell
+  3. els
+  4. elul
+      ...
+```
+
+Per fer un test respecte una llista de paraules coneguda, pots fer servir `test.py`:
+```
+$ python /home/eduard/Code/paraulogic/test.py
 Lletra central: u
 Lletres extra:  aelmnt
-S'ha trobat 158 paraules:
-  1. aleuta
-  2. allau
-  3. allunament
-  4. allunat
-      ...
+
+Manquen les següents paraules:
+- muntana
+- nueta
+- unena
 ```
 
 ### Raison d'être
