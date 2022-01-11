@@ -1,41 +1,55 @@
 import sys
-sys.path.append("../src")
 
 from src.validator import Validator
 from src.dictionary import Dictionary
 import unidecode
 
-# Dades de 2021-01-09
-lletra_central = "u"
-altres_lletres = "aelmnt"
+data = [2021, 1, 9] if len(sys.argv) < 4 else [int(x)  for x in sys.argv[1:]]
+
+testdata = {}
+lletres = {}
+try:
+    with open(f"data/paraulogic_{data[0]:>04}_{data[1]:>02}_{data[2]:>02}.txt") as f:
+
+        for i in range(2):
+            line = f.readline()
+            lletres[line.split(":")[0]] = line.split(":")[-1].replace("\n", "")
+
+        for line in f:
+            testdata[unidecode.unidecode(line).strip().replace("*", "").split()[0]] = line
+except FileNotFoundError:
+    print(f"No s'ha trobat l'arxiu data/paraulogic_{data[0]:>04}_{data[1]:>02}_{data[2]:>02}.txt\n")
+    exit(4)
 
 diec =      Dictionary("data/diec.txt")
-validator = Validator(lletra_central, altres_lletres)  
+validator = Validator(lletres["CENTRE"], lletres["EXTRA"])  
 
 for entry in diec:
     validator.validate_entry(entry)
 obtained = set(validator.words.keys())
 
-with open("data/paraulogic_2021_01_09.txt") as f:
-    testdata = set([unidecode.unidecode(x).strip().replace("*", "") for x in f.readlines()])
-
 retval = 0
 
-missing = list(testdata.difference(obtained))
+print()
+
+missing = list(set(testdata.keys()).difference(obtained))
 if len(missing):
     missing.sort()
-    print("Missing words are:")
+    print("Manquen les següents paraules:")
     for w in missing:
-        print(f" {w.replace('*', '·')}")
-    retval -= 1
+        print("-", w)
+    retval += 1
 
-wrong = list(obtained.difference(testdata))
+wrong = list(obtained.difference(set(testdata.keys())))
 if len(wrong):
     wrong.sort()
-    print("Wrong words are:")
+    print("Sobren les següents paraules:")
     for w in wrong:
-        print(f" {w.replace('*', '·')}")
-    retval -= 2
+        print("-", " o ".join(validator.words[w]))
+    retval += 2
+
+if retval == 0:
+    print("Cap error!")
 
 exit(retval)
 
