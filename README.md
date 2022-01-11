@@ -1,6 +1,6 @@
 # Solucionari del paraulògic
 
-Aquest codi permet trobar la majoria de solucions del Paraulògic. Hi ha algunes paraules que de moment no troba, com els femenins dels adjectius. Això es deu a que encara no he implementat una forma de generar-los a partir de les entrades del diec.
+Aquest codi permet trobar la majoria de solucions del Paraulògic. Hi ha algunes paraules que de moment no troba, com els femenins dels adjectius. Això es deu a que encara no he implementat una forma de generar-los a partir de les entrades del DIEC.
 
 
 ### Llistat de mots
