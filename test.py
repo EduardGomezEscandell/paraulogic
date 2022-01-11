@@ -16,7 +16,7 @@ try:
             lletres[line.split(":")[0]] = line.split(":")[-1].replace("\n", "")
 
         for line in f:
-            testdata[unidecode.unidecode(line).strip().replace("*", "").split()[0]] = line
+            testdata[unidecode.unidecode(line).strip().replace("*", "").split()[0]] = line.replace("\n", "")
 except FileNotFoundError:
     print(f"No s'ha trobat l'arxiu data/paraulogic_{data[0]:>04}_{data[1]:>02}_{data[2]:>02}.txt\n")
     exit(4)
@@ -37,7 +37,7 @@ if len(missing):
     missing.sort()
     print("Manquen les següents paraules:")
     for w in missing:
-        print("-", w)
+        print("-", testdata[w])
     retval += 1
 
 wrong = list(obtained.difference(set(testdata.keys())))
